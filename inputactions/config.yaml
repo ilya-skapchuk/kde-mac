@@ -1,0 +1,44 @@
+# Docs: https://wiki.inputactions.org
+# Three-finger swipes are handled by swipe.sh. Left/right switch between the
+# desktops of the screen under the cursor; four fingers keep KWin's built-in
+# switching through all desktops, which follows the fingers.
+
+device_rules:
+  # No diagonal directions, so slightly slanted swipes still count as straight
+  - conditions: $touchpad
+    swipe:
+      angle_tolerance: 45
+
+touchpad:
+  gestures:
+    - type: swipe
+      fingers: 3
+      direction: up
+
+      actions:
+        - on: begin
+          command: ~/.config/inputactions/swipe.sh up
+
+    - type: swipe
+      fingers: 3
+      direction: down
+
+      actions:
+        - on: begin
+          command: ~/.config/inputactions/swipe.sh down
+
+    - type: swipe
+      fingers: 3
+      direction: left
+
+      actions:
+        - on: begin
+          command: ~/.config/inputactions/swipe.sh left
+
+    - type: swipe
+      fingers: 3
+      direction: right
+
+      actions:
+        - on: begin
+          command: ~/.config/inputactions/swipe.sh right

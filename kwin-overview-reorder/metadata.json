@@ -1,0 +1,10 @@
+{
+    "KPlugin": {
+        "Category": "Window Management",
+        "Description": "The Overview effect, with desktops in the top bar reorderable by dragging",
+        "EnabledByDefault": false,
+        "License": "GPL",
+        "Name": "Overview (reorderable desktops)"
+    },
+    "X-KDE-ConfigModule": "kwin_overview_config"
+}

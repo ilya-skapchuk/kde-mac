@@ -1,0 +1,5 @@
+kwin-overview-reorder/*.tar.xz
+kwin-overview-reorder/*.pkg.tar.*
+kwin-overview-reorder/src/
+kwin-overview-reorder/pkg/
+*.bak

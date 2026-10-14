@@ -1,0 +1,39 @@
+# Local package: KWin's Overview effect with drag-and-drop reordering of the
+# desktops in its top bar. It is built from the Overview sources of the
+# installed KWin version, so rebuild it (./build.sh) after every KWin update.
+
+pkgname=kwin-overview-reorder
+_kwinver=$(pacman -Q kwin | awk '{print $2}')
+pkgver=${_kwinver%-*}
+pkgrel=2
+pkgdesc="KWin Overview effect with drag-and-drop reordering of virtual desktops"
+arch=(x86_64)
+url="https://invent.kde.org/plasma/kwin"
+license=(GPL-2.0-or-later)
+depends=(kwin)
+makedepends=(cmake extra-cmake-modules python vulkan-headers)
+source=("https://download.kde.org/stable/plasma/$pkgver/kwin-$pkgver.tar.xz"
+        CMakeLists.txt
+        metadata.json
+        patch-overview.py
+        spaces.h
+        spaces.cpp)
+noextract=("kwin-$pkgver.tar.xz")
+sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP)
+
+prepare() {
+  rm -rf "kwin-$pkgver" effect
+  bsdtar -xf "kwin-$pkgver.tar.xz" "kwin-$pkgver/src/plugins/overview"
+  python patch-overview.py "kwin-$pkgver/src/plugins/overview" effect
+  cp CMakeLists.txt metadata.json spaces.h spaces.cpp effect/
+}
+
+build() {
+  cmake -B build -S effect -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev \
+    -DBUILD_ID="$(date +%Y%m%d%H%M%S)"
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}

@@ -1,0 +1,13 @@
+{
+    "KPackageStructure": "KWin/Script",
+    "KPlugin": {
+        "Description": "Gives maximized and fullscreen windows virtual desktops of their own, like full-screen apps on macOS",
+        "EnabledByDefault": false,
+        "Id": "macspaces",
+        "License": "GPL-2.0-or-later",
+        "Name": "Spaces",
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js"
+}
